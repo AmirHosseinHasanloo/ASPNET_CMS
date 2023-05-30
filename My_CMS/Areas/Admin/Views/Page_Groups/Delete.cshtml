@@ -1,0 +1,30 @@
+﻿@model DataLayer.Model.Page_Groups
+
+@{
+    ViewBag.Title = "حذف سرگروه";
+}
+
+<h2>حذف سرگروه اخبار</h2>
+
+<h3>آیا از حذف کردن این سرگروه @Model.GroupTitle مطمئن هستید ؟</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupTitle)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-danger" /> 
+        </div>
+    }
+</div>

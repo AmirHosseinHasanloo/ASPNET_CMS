@@ -1,0 +1,108 @@
+﻿@model DataLayer.Model.Pages
+@{
+    ViewBag.Title = "صفحه خبر";
+}
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">خانه </a></li>
+        <li class="breadcrumb-item"><a href="/Home/ArchiveNews">اخبار </a></li>
+        <li class="breadcrumb-item"><a href="/ShowPages/@Model.GroupID">@Model.Page_Groups.GroupTitle</a></li>
+        <li class="breadcrumb-item active">@Model.PageTitle</li>
+    </ul>
+    <section class="single-news border-radius">
+
+        <header><h2> @Model.PageTitle </h2> <span> <i class="fa fa-calendar"></i>  انتشار :@Model.CreateDate</span></header>
+        <article>
+            <div class="thumbnail">
+                <img src="/Images/NewsImages/@Model.ImageName" class="img-rounded" alt="News Image" />
+            </div>
+            <p>
+                @Html.Raw(Model.ShortDescription)
+            </p>
+            <p>
+                @Html.Raw(Model.Text)
+            </p>
+        </article>
+        <a class="alert "><i class="fa fa-eye"></i> بازدید : @Model.Visit</a>
+    </section>
+
+    <div class="keywords border-radius">
+        @foreach (var item in Model.Tags)
+        {
+            <a href=""> @item.Tag </a>
+        }
+    </div>
+
+
+    <section class="comment-layer">
+        <header> <i class="fa fa-comments"></i><h5> دیدگاه کاربران </h5><span> @Model.Comments.Count دیدگاه </span> </header>
+        <h6> شما هم دیدگاه خود را ارسال کنید </h6>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form class="comment-form" id="CommentForm" action="" method="post">
+                <div>
+                    <input id="Name" name="Name" placeholder=" نام و نام خانوادگی" type="text">
+                    <input id="Email" name="Email" placeholder=" ایمیل خود را وارد نمایید " type="email">
+                </div>
+                <textarea id="Comment" name="Comment" placeholder=" متن دیدگاه"> </textarea>
+                <input onclick="AddComment()" value="ثبت دیدگاه ارزشمند شما " type="submit">
+            </form>
+        }
+        else
+        {
+            <div class="alert text-center">
+                <h5 class="text-info">
+                    کاربر گرامی برای به اشتراک گذاشتن نظرات ارزشمندتان باید وارد حسابتان بشوید در صورت نداشتن حساب میتوانید از تب زیر اقدام کنید
+                </h5>
+                <br />
+                <a class="btn btn-primary" href="/Register">ثبت نام</a>
+                <a class="btn btn-success" href="/Login">ورود</a>
+            </div>
+        }
+        <ul id="CommentList">
+            @Html.Action("ShowCommentsByPageId", "Home")
+        </ul>
+    </section>
+</div>
+
+
+<script>
+
+function AddComment() {
+    $.ajax({
+        url:"/Home/AddComment/" +@Model.PageID,
+    type: "Get",
+        data: { Name: $("#Name").val(), Email: $("#Email").val(), Comment: $("#Comment").val() }
+}).done(function (res) {
+    $("#CommentList").html(res);
+    $("#Name").val("");
+    $("#Email").val("");
+    $("#Comment").val("");
+    alert("کاربر گرامی نظر شما با موفقیت ثبت شد");
+
+});
+}
+
+
+const form = document.getElementById('CommentForm');
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault(); //prevent form submission
+
+    const name = document.getElementById("Name");
+    const email = document.getElementById("Email");
+    const comment = document.getElementById("Comment");
+
+    if (name.value.trim() === "") {
+        name.insertAdjacentHTML("afterend", '<p class="alert text-danger">کاربر گرامی این فیلد نمی تواند خالی باشد</p>');
+    }
+    if (email.value.trim() === "") {
+        email.insertAdjacentHTML("afterend", '<p class="alert text-danger">کاربر گرامی این فیلد نمی تواند خالی باشد</p>');
+    }
+    if (comment.value.trim() === "") {
+        comment.insertAdjacentHTML("afterend", '<p class="alert text-danger">کاربر گرامی این فیلد نمی تواند خالی باشد</p>');
+    }
+});
+</script>
+

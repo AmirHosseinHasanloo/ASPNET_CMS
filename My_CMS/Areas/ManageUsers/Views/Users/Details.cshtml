@@ -1,0 +1,57 @@
+﻿@model DataLayer.Model.Users
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>مشخصات کلی کاربر</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </dt>
+
+        <dd>
+            @Model.RegisterDate.ToString("dddd, dd MMMM yyyy")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles.RoleTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roles.RoleTitle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

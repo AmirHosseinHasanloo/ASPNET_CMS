@@ -1,0 +1,15 @@
+﻿@model IEnumerable<DataLayer.Model.Comments>
+
+<!-- start each comment -->
+@foreach (var item in Model)
+{
+    <li>
+        @*<img src="img/thumb.png">*@
+        <div>
+            <span> @item.UserName </span>
+            <span> @item.CreateDate.ToString("dddd, dd MMMM yyyy")</span>
+        </div>
+        <p>@Html.Raw(item.Comment)</p>
+    </li>
+}
+<!-- end each comment -->

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DataLayer.Model.Page_Groups>
+@{
+    ViewBag.Title = "منو";
+}
+
+@foreach (var item in Model)
+{
+    <li><a href="/ShowPages/@item.GroupID">@item.GroupTitle</a></li>
+}
+

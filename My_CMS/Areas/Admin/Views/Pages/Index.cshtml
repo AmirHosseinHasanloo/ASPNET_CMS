@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DataLayer.Model.Pages>
+@using DataLayer.Model;
+@{
+    ViewBag.Title = "صفحه اصلی مدیریت خبر";
+}
+
+<h2>خبر ها</h2>
+
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">افزودن خبر جدید</a>
+    @Html.Action("SelectNewsGroup", "Pages")
+</p>
+<table class="table col-md-12 col-lg-12 col-xs-12 col-lg-12 col-sm-12">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Page_Groups.GroupTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowInSlider)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="/Images/Thumb/@item.ImageName" class="thumbnail" alt="News Image" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Page_Groups.GroupTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowInSlider)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new {id=item.PageID})" class="btn btn-xs btn-warning">ویرایش خبر</a>
+                <a href="@Url.Action("Details",new {id=item.PageID})" class="btn btn-xs btn-info">مشخصات خبر</a>
+                <a href="@Url.Action("Delete",new {id=item.PageID})" class="btn btn-xs btn-danger">حذف خبر</a>
+            </td>
+        </tr>
+    }
+
+</table>

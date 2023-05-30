@@ -1,0 +1,54 @@
+﻿@model DataLayer.Model.Pages
+
+@{
+    ViewBag.Title = "اطلاعات کلی";
+}
+
+<h2>مشخصات اخبار</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PageTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageTitle)
+        </dd>
+          
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+
+        <dd>
+            <img src="~/Images/Thumb/@Model.ImageName" class="thumbnail" alt="Picture" />
+        </dd>  
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowInSlider)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowInSlider)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Page_Groups.GroupTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Page_Groups.GroupTitle)
+        </dd>
+
+    </dl>
+</div>
+
