@@ -5,11 +5,19 @@
 }
 
 <h2>خبر ها</h2>
-
-
 <p>
-    <a href="@Url.Action("Create")" class="btn btn-primary">افزودن خبر جدید</a>
+
+    <div class="alert alert-info text-center">
+        <h4 class="alert">
+            سایر بخش های پنل ادمین :
+        </h4>
+        <a class="btn btn-default" href="@Url.Action("Create")">افزودن خبر جدید</a>
+        <a class="btn btn-warning" href="/Admin/Page_Groups">ویرایش و افزودن گروه ها </a>
+        <a class="btn btn-primary" href="/ManageUsers/Users">مدیریت کاربران و ادمین ها </a>
+    </div>
+
     @Html.Action("SelectNewsGroup", "Pages")
+
 </p>
 <table class="table col-md-12 col-lg-12 col-xs-12 col-lg-12 col-sm-12">
     <tr>

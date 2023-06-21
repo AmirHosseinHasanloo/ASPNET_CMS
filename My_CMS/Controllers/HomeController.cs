@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
+using System.Web.UI.WebControls.WebParts;
 
 namespace My_CMS.Controllers
 {
@@ -88,6 +89,10 @@ namespace My_CMS.Controllers
         public ActionResult ShowCommentsByPageId(int id)
         {
             return PartialView(pageCommentRepository.GetCommentById(id));
+        }
+        public ActionResult AdminIdentity()
+        {
+            return PartialView();
         }
     }
 }
