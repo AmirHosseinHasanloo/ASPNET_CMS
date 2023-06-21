@@ -15,7 +15,8 @@ namespace DataLayer
         bool InsertComment(Comments comment);
         bool UpdateComment(Comments comment);
         bool DeleteComment(Comments comment);
-        bool DeleteComment(int commentid);
+        bool DeleteComment(int? commentid);
+        bool DeleteCommentsByPageId(int? pageid);
         void Save();
     }
 }

@@ -133,8 +133,11 @@ namespace DataLayer
 
         public IEnumerable<Pages> SearchPages(string q)
         {
-            return db.Pages.Where(P => P.PageTitle.Contains(q) || P.Text.Contains(q) ||
-            P.ShortDescription.Contains(q) || P.Page_Groups.GroupTitle.Contains(q)).ToList();
+            List<Pages> list = new List<Pages>();
+            list.AddRange(db.Tags.Where(T => T.Tag == q).Select(T => T.Pages).ToList());
+            list.AddRange(db.Pages.Where(P => P.PageTitle.Contains(q) || P.Text.Contains(q) ||
+             P.ShortDescription.Contains(q) || P.Page_Groups.GroupTitle.Contains(q)).ToList());
+            return list.Distinct();
         }
 
         public void Save()
