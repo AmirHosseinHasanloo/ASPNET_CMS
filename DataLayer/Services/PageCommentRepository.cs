@@ -15,7 +15,7 @@ namespace DataLayer
         private EF_MyCMS_DBEntities db;
         public PageCommentRepository(EF_MyCMS_DBEntities context)
         {
-            this.db = context;
+            this.db= context;
         }
         public IEnumerable<Comments> GetAllComments()
         {
@@ -29,79 +29,64 @@ namespace DataLayer
 
         public bool InsertComment(Comments comment)
         {
-            if (comment != null)
+            try
             {
                 db.Comments.Add(comment);
                 return true;
             }
-            else
+            catch (Exception)
             {
+
                 return false;
             }
-            
         }
 
         public bool UpdateComment(Comments comment)
         {
-            if (comment != null)
+            try
             {
                 db.Entry(comment).State = EntityState.Modified;
                 return true;
             }
-            else
+            catch (Exception)
             {
+
                 return false;
             }
         }
 
         public bool DeleteComment(Comments comment)
         {
-
-            if (comment != null)
+            try
             {
                 db.Entry(comment).State = EntityState.Deleted;
                 return true;
             }
-            else
+            catch (Exception)
             {
+
                 return false;
             }
         }
 
-        public bool DeleteComment(int? commentid)
+        public bool DeleteComment(int commentid)
         {
-
-            if (commentid != null)
+            try
             {
                 var delete = db.Comments.Find(commentid);
                 DeleteComment(delete);
                 return true;
             }
-            else
+            catch (Exception)
             {
-                return false;
-            }
-        }
 
-        public bool DeleteCommentsByPageId(int? pageid)
-        {
-            if (pageid != null)
-            {
-                foreach (var item in db.Comments.Where(C=>C.PageID==pageid))
-                {
-                    db.Comments.Remove(item);
-                }
-                return true;
-            }
-            else
-            {
-                return false;
+                throw;
             }
         }
 
         public void Save()
         {
-            db.SaveChanges();
+           db.SaveChanges();
         }
     }
 }
