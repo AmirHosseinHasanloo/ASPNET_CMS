@@ -14,18 +14,15 @@ using My_DeepLearn.MyUtitlties;
 
 namespace My_CMS.Areas.Admin.Controllers
 {
-    [Authorize(Roles ="Admin")]
     public class PagesController : Controller
     {
         private EF_MyCMS_DBEntities db = new EF_MyCMS_DBEntities();
         IPagesRepository pagesRepository;
         IPageGroupsRepository pageGroupsRepository;
-        IPageCommentRepository pageCommentRepository;
         public PagesController()
         {
             pagesRepository = new PagesRepository(db);
             pageGroupsRepository = new PageGroupsRepository(db);
-            pageCommentRepository = new PageCommentRepository(db);
         }
 
         // GET: Admin/Pages
@@ -163,13 +160,7 @@ namespace My_CMS.Areas.Admin.Controllers
 
             //Delete Tags
             pagesRepository.DeleteTagsByPageId(pages.PageID);
-            pagesRepository.Save();
-            //End Delete Tags
 
-            //Delete Comments
-            pageCommentRepository.DeleteCommentsByPageId(pages.PageID);
-            pageCommentRepository.Save();
-            //End Delete Comments
             if (pages == null)
             {
                 return HttpNotFound();
